@@ -8,14 +8,14 @@ pub fn ex04() {
 }
 
 pub fn sub1(s: &str) -> i32 {
-    let range = s.split("-").collect::<Vec<&str>>();
+    let range = s.split('-').collect::<Vec<&str>>();
     let min = range[0].parse::<i32>().unwrap_or(0);
     let max = range[1].parse::<i32>().unwrap_or(0);
     passwords(min, max)
 }
 
 pub fn sub2(s: &str) -> i32 {
-    let range = s.split("-").collect::<Vec<&str>>();
+    let range = s.split('-').collect::<Vec<&str>>();
     let min = range[0].parse::<i32>().unwrap_or(0);
     let max = range[1].parse::<i32>().unwrap_or(0);
     new_passwords(min, max)
@@ -86,31 +86,31 @@ mod tests {
 
     #[test]
     fn sub11() {
-        assert_eq!(criteria(111111), true);
+        assert_eq!(criteria(111_111), true);
     }
 
     #[test]
     fn sub12() {
-        assert_eq!(criteria(223450), false);
+        assert_eq!(criteria(223_450), false);
     }
 
     #[test]
     fn sub13() {
-        assert_eq!(criteria(123789), false);
+        assert_eq!(criteria(123_789), false);
     }
 
     #[test]
     fn sub21() {
-        assert_eq!(new_criteria(112233), true);
+        assert_eq!(new_criteria(112_233), true);
     }
 
     #[test]
     fn sub22() {
-        assert_eq!(new_criteria(123444), false);
+        assert_eq!(new_criteria(123_444), false);
     }
 
     #[test]
     fn sub23() {
-        assert_eq!(new_criteria(111122), true);
+        assert_eq!(new_criteria(111_122), true);
     }
 }

@@ -36,7 +36,7 @@ pub fn sub2(s: &str) -> i32 {
     min_distance(&mut points1, &mut points2)
 }
 
-fn sort_manhattan(a: &(i32, i32), b: &(i32, i32)) -> Ordering {
+fn sort_manhattan(a: (i32, i32), b: (i32, i32)) -> Ordering {
     (a.0.abs() + a.1.abs()).cmp(&(b.0.abs() + b.1.abs()))
 }
 
@@ -57,8 +57,8 @@ fn min_distance(v1: &mut Vec<(i32, i32)>, v2: &mut Vec<(i32, i32)>) -> i32 {
 }
 
 fn min_manhattan(v1: &mut Vec<(i32, i32)>, v2: &mut Vec<(i32, i32)>) -> i32 {
-    v1.sort_by(|a, b| sort_manhattan(a, b));
-    v2.sort_by(|a, b| sort_manhattan(a, b));
+    v1.sort_by(|a, b| sort_manhattan(*a, *b));
+    v2.sort_by(|a, b| sort_manhattan(*a, *b));
     let mut man = 0;
     'outer: for i in 1..v1.len() {
         for j in 1..v2.len() {
