@@ -1,11 +1,10 @@
 use std::cmp::{min, Ordering};
-use std::fs;
+use crate::helpers::file::{read, write};
 
 pub fn ex03() {
-    match fs::read_to_string("src/inputs/ex03.txt") {
-        Ok(s) => println!("Ex 03.1: {} | Ex 03.2: {}", sub1(&s), sub2(&s)),
-        _ => println!("Cannot read ex03.txt"),
-    }
+    let e = "03";
+    let s = read(e);
+    write(e, &sub1(&s).to_string(), &sub2(&s).to_string());
 }
 
 pub fn sub1(s: &str) -> i32 {

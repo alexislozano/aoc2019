@@ -1,10 +1,9 @@
-use std::fs;
+use crate::helpers::file::{read, write};
 
 pub fn ex04() {
-    match fs::read_to_string("src/inputs/ex04.txt") {
-        Ok(s) => println!("Ex 04.1: {} | Ex 04.2: {}", sub1(&s), sub2(&s)),
-        _ => println!("Cannot read ex04.txt"),
-    }
+    let e = "04";
+    let s = read(e);
+    write(e, &sub1(&s).to_string(), &sub2(&s).to_string());
 }
 
 pub fn sub1(s: &str) -> i32 {

@@ -1,12 +1,9 @@
-use std::fs;
+use crate::helpers::file::{read, write};
 
 pub fn ex08() {
-    match fs::read_to_string("src/inputs/ex08.txt") {
-        Ok(s) => println!("Ex 08.1: {} | Ex 08.2: \n{}", 
-            sub1(&s, 25, 6), sub2(&s, 25, 6)
-        ),
-        _ => println!("Cannot read ex08.txt"),
-    }
+    let e = "08";
+    let s = read(e);
+    write(e, &sub1(&s, 25, 6).to_string(), &sub2(&s, 25, 6).to_string());
 }
 
 pub fn sub1(s: &str, width: i32, height: i32) -> i32 {
@@ -31,9 +28,11 @@ fn result(image: Image) -> String {
     let mut res = "".to_string();
     for i in 0..image.height {
         for j in 0..image.width {
-            let pixels = image.layers.iter().map(|l| 
-                l[(i * image.width + j) as usize]
-            ).collect::<Vec<i32>>();
+            let pixels = image
+                .layers
+                .iter()
+                .map(|l| l[(i * image.width + j) as usize])
+                .collect::<Vec<i32>>();
             res.push_str(&format!("{} ", color(pixels)));
         }
         res.push_str("\n");
@@ -56,21 +55,30 @@ fn mult_12(image: Image) -> i32 {
     let mut index0 = 0;
     let mut min0 = image.height * image.width;
     for (i, layer) in image.layers.iter().enumerate() {
-        let c = layer.iter().map(|p| if *p == 0 { 1 } else { 0 }).sum::<i32>();
+        let c = layer
+            .iter()
+            .map(|p| if *p == 0 { 1 } else { 0 })
+            .sum::<i32>();
         if c < min0 {
             min0 = c;
             index0 = i;
         }
     }
-    image.layers[index0].iter().map(|p| if *p == 1 { 1 } else { 0 }).sum::<i32>() *
-    image.layers[index0].iter().map(|p| if *p == 2 { 1 } else { 0 }).sum::<i32>()
+    image.layers[index0]
+        .iter()
+        .map(|p| if *p == 1 { 1 } else { 0 })
+        .sum::<i32>()
+        * image.layers[index0]
+            .iter()
+            .map(|p| if *p == 2 { 1 } else { 0 })
+            .sum::<i32>()
 }
 
 #[derive(Debug)]
 struct Image {
     width: i32,
     height: i32,
-    layers: Vec<Vec<i32>>
+    layers: Vec<Vec<i32>>,
 }
 
 impl Image {
@@ -87,7 +95,11 @@ impl Image {
             }
             layers.push(layer);
         }
-        Self { layers, width, height }
+        Self {
+            layers,
+            width,
+            height,
+        }
     }
 }
 
