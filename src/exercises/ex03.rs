@@ -1,5 +1,5 @@
-use std::cmp::{min, Ordering};
 use crate::helpers::file::{read, write};
+use std::cmp::{min, Ordering};
 
 pub fn ex03() {
     let e = "03";

@@ -3,7 +3,11 @@ use crate::helpers::file::{read, write};
 pub fn ex08() {
     let e = "08";
     let s = read(e);
-    write(e, &sub1(&s, 25, 6).to_string(), &sub2(&s, 25, 6).to_string());
+    write(
+        e,
+        &sub1(&s, 25, 6).to_string(),
+        &sub2(&s, 25, 6).to_string(),
+    );
 }
 
 pub fn sub1(s: &str, width: i32, height: i32) -> i32 {

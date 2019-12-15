@@ -1,5 +1,5 @@
-use crate::helpers::file::{read, write};
 use crate::helpers::computer::{Computer, State};
+use crate::helpers::file::{read, write};
 
 pub fn ex09() {
     let e = "09";
@@ -45,10 +45,7 @@ mod tests {
 
     #[test]
     fn sub11() {
-        assert_eq!(
-            sub1("104,1125899906842624,99"),
-            1_125_899_906_842_624
-        );
+        assert_eq!(sub1("104,1125899906842624,99"), 1_125_899_906_842_624);
     }
 
     #[test]
@@ -61,9 +58,6 @@ mod tests {
 
     #[test]
     fn sub13() {
-        assert_eq!(
-            sub1("104,-2,99"),
-            -2
-        );
+        assert_eq!(sub1("104,-2,99"), -2);
     }
 }

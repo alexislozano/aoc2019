@@ -1,5 +1,5 @@
-use crate::helpers::file::{read, write};
 use crate::helpers::computer::{Computer, State};
+use crate::helpers::file::{read, write};
 
 pub fn ex05() {
     let e = "05";
@@ -13,10 +13,10 @@ pub fn sub1(s: &str, input: i64) -> i64 {
         .map(|x| x.parse::<i64>().unwrap_or(0))
         .collect::<Vec<i64>>();
     let mut computer = Computer::new("computer", program);
-    computer.run(input); 
+    computer.run(input);
     match computer.state() {
         State::Terminated => computer.output(),
-        _ => unreachable!()
+        _ => unreachable!(),
     }
 }
 
@@ -26,10 +26,10 @@ pub fn sub2(s: &str, input: i64) -> i64 {
         .map(|x| x.parse::<i64>().unwrap_or(0))
         .collect::<Vec<i64>>();
     let mut computer = Computer::new("computer", program);
-    computer.run(input); 
+    computer.run(input);
     match computer.state() {
         State::Terminated => computer.output(),
-        _ => unreachable!()
+        _ => unreachable!(),
     }
 }
 

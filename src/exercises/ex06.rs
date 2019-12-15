@@ -1,6 +1,6 @@
+use crate::helpers::file::{read, write};
 use std::collections::HashMap;
 use std::collections::HashSet;
-use crate::helpers::file::{read, write};
 
 pub fn ex06() {
     let e = "06";

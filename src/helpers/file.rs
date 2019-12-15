@@ -8,10 +8,11 @@ pub fn read(e: &str) -> String {
 }
 
 pub fn write(e: &str, s1: &str, s2: &str) {
-    match fs::write(format!("src/outputs/ex{}.txt", e), format!(
-        "{}\n----\n{}", s1, s2
-    )) {
+    match fs::write(
+        format!("src/outputs/ex{}.txt", e),
+        format!("{}\n----\n{}", s1, s2),
+    ) {
         Ok(_) => println!("ex{} ok", e),
-        _ => panic!("Cannot write in ex{}.txt", e)
+        _ => panic!("Cannot write in ex{}.txt", e),
     }
 }

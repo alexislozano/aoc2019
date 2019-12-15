@@ -76,8 +76,7 @@ impl Computer {
                                 }
                                 Mode::Immediate => self.counter + 2,
                                 Mode::Relative => {
-                                    (self.program(self.counter + 2)
-                                        + self.base)
+                                    (self.program(self.counter + 2) + self.base)
                                         as usize
                                 }
                             };
@@ -86,16 +85,14 @@ impl Computer {
                                     self.counter = match code.opcode {
                                         Opcode::JumpIfTrue => {
                                             if self.program(index0) != 0 {
-                                                self.program(index1)
-                                                    as usize
+                                                self.program(index1) as usize
                                             } else {
                                                 self.counter + 3
                                             }
                                         }
                                         Opcode::JumpIfFalse => {
                                             if self.program(index0) == 0 {
-                                                self.program(index1)
-                                                    as usize
+                                                self.program(index1) as usize
                                             } else {
                                                 self.counter + 3
                                             }
@@ -157,15 +154,17 @@ impl Computer {
                         }
                         Opcode::Input | Opcode::Output | Opcode::AdjustBase => {
                             match code.opcode {
-                                Opcode::Input => if was_input_used {
-                                    break State::Input
-                                } else {
-                                    self.set_program(index0, input);
-                                    was_input_used = true;
-                                },
+                                Opcode::Input => {
+                                    if was_input_used {
+                                        break State::Input;
+                                    } else {
+                                        self.set_program(index0, input);
+                                        was_input_used = true;
+                                    }
+                                }
                                 Opcode::Output => {
                                     self.output = self.program(index0)
-                                },
+                                }
                                 Opcode::AdjustBase => {
                                     self.base += self.program(index0);
                                 }

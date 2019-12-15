@@ -1,10 +1,14 @@
-use crate::helpers::file::{read, write};
 use crate::helpers::computer::Computer;
+use crate::helpers::file::{read, write};
 
 pub fn ex02() {
     let e = "02";
     let s = read(e);
-    write(e, &sub1(&s, Some((12, 2))).to_string(), &sub2(&s).to_string());
+    write(
+        e,
+        &sub1(&s, Some((12, 2))).to_string(),
+        &sub2(&s).to_string(),
+    );
 }
 
 pub fn sub1(s: &str, args: Option<(i64, i64)>) -> i64 {

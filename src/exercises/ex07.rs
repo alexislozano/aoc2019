@@ -1,6 +1,6 @@
-use std::collections::{HashMap, HashSet};
-use crate::helpers::file::{read, write};
 use crate::helpers::computer::{Computer, State};
+use crate::helpers::file::{read, write};
+use std::collections::{HashMap, HashSet};
 
 pub fn ex07() {
     let e = "07";
@@ -27,38 +27,33 @@ pub fn sub1(s: &str) -> i64 {
                         h.insert(s5);
                         if h.len() == 5 {
                             let amp_a = Amplifier::new(
-                                Computer::new("A", program.clone()), 
+                                Computer::new("A", program.clone()),
                                 s1,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_b = Amplifier::new(
-                                Computer::new("B", program.clone()), 
+                                Computer::new("B", program.clone()),
                                 s2,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_c = Amplifier::new(
                                 Computer::new("C", program.clone()),
                                 s3,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_d = Amplifier::new(
                                 Computer::new("D", program.clone()),
                                 s4,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_e = Amplifier::new(
                                 Computer::new("E", program.clone()),
                                 s5,
-                                AmpKind::Output
+                                AmpKind::Output,
                             );
 
-                            let mut system: System = vec![
-                                amp_a, 
-                                amp_b, 
-                                amp_c, 
-                                amp_d, 
-                                amp_e,
-                            ];
+                            let mut system: System =
+                                vec![amp_a, amp_b, amp_c, amp_d, amp_e];
 
                             let mut graph = Graph::new();
                             graph.add_child(0, 1);
@@ -101,36 +96,31 @@ pub fn sub2(s: &str) -> i64 {
                             let amp_a = Amplifier::new(
                                 Computer::new("A", program.clone()),
                                 s1,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_b = Amplifier::new(
                                 Computer::new("B", program.clone()),
                                 s2,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_c = Amplifier::new(
                                 Computer::new("C", program.clone()),
                                 s3,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_d = Amplifier::new(
                                 Computer::new("D", program.clone()),
                                 s4,
-                                AmpKind::Basic
+                                AmpKind::Basic,
                             );
                             let amp_e = Amplifier::new(
                                 Computer::new("E", program.clone()),
                                 s5,
-                                AmpKind::Output
+                                AmpKind::Output,
                             );
 
-                            let mut system: System = vec![
-                                amp_a, 
-                                amp_b, 
-                                amp_c, 
-                                amp_d, 
-                                amp_e,
-                            ];
+                            let mut system: System =
+                                vec![amp_a, amp_b, amp_c, amp_d, amp_e];
 
                             let mut graph = Graph::new();
                             graph.add_child(0, 1);
@@ -159,12 +149,10 @@ fn run(graph: &Graph, system: &mut System, from: usize, input: i64) -> i64 {
     match graph.connections.get(&from) {
         Some(child_index) => match &system[from].kind {
             AmpKind::Basic => run(graph, system, *child_index, output),
-            AmpKind::Output => {
-                match &system[*child_index].state() {
-                    State::Input => run(graph, system, *child_index, output),
-                    _ => output
-                }
-            }
+            AmpKind::Output => match &system[*child_index].state() {
+                State::Input => run(graph, system, *child_index, output),
+                _ => output,
+            },
         },
         None => output,
     }
@@ -191,19 +179,22 @@ impl Graph {
 
 enum AmpKind {
     Basic,
-    Output
+    Output,
 }
 
 struct Amplifier {
     computer: Computer,
     setting: i64,
-    kind: AmpKind
+    kind: AmpKind,
 }
-
 
 impl Amplifier {
     fn new(computer: Computer, setting: i64, kind: AmpKind) -> Self {
-        Self { computer, setting, kind }
+        Self {
+            computer,
+            setting,
+            kind,
+        }
     }
 
     fn run(&mut self, input: i64) {
