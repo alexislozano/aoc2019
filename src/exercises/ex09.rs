@@ -13,11 +13,12 @@ pub fn sub1(s: &str) -> i64 {
         .map(|x| x.parse::<i64>().unwrap_or(0))
         .collect::<Vec<i64>>();
     let mut c = Computer::new("computer", program.clone());
+    c.set_input(1);
     loop {
         match c.state() {
             State::Terminated => break c.output(),
             _ => {
-                c.run(1);
+                c.run();
             }
         }
     }
@@ -29,11 +30,12 @@ pub fn sub2(s: &str) -> i64 {
         .map(|x| x.parse::<i64>().unwrap_or(0))
         .collect::<Vec<i64>>();
     let mut c = Computer::new("computer", program.clone());
+    c.set_input(2);
     loop {
         match c.state() {
             State::Terminated => break c.output(),
             _ => {
-                c.run(2);
+                c.run();
             }
         }
     }

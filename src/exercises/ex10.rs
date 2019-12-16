@@ -45,7 +45,7 @@ fn vaporized(
     let origin = asteroids[index];
     let mut nb_of_detected_asteroids;
 
-    detected_asteroids.sort_by(|a, b| a.compare(b, &origin));
+    detected_asteroids.sort_by(|a, b| a.compare(*b, origin));
     nb_of_detected_asteroids = detected_asteroids.len();
 
     let th_asteroid: Asteroid = if nb_of_detected_asteroids >= th as usize {
@@ -58,7 +58,7 @@ fn vaporized(
                 asteroids.remove(asteroid_index);
             }
             detected_asteroids = rotation(&asteroids, origin);
-            detected_asteroids.sort_by(|a, b| a.compare(b, &origin));
+            detected_asteroids.sort_by(|a, b| a.compare(*b, origin));
             nb_of_detected_asteroids += detected_asteroids.len();
 
             if nb_of_detected_asteroids >= th as usize {
@@ -76,7 +76,7 @@ fn nb_in_best_location(asteroids: Vec<Asteroid>) -> i32 {
     best_location(&asteroids).1.len() as i32
 }
 
-fn best_location(asteroids: &Vec<Asteroid>) -> (usize, Vec<Asteroid>) {
+fn best_location(asteroids: &[Asteroid]) -> (usize, Vec<Asteroid>) {
     let mut detected_asteroids: Vec<Asteroid> = vec![];
     let mut max_index = 0;
 
@@ -91,7 +91,7 @@ fn best_location(asteroids: &Vec<Asteroid>) -> (usize, Vec<Asteroid>) {
     (max_index, detected_asteroids)
 }
 
-fn rotation(asteroids: &Vec<Asteroid>, origin: Asteroid) -> Vec<Asteroid> {
+fn rotation(asteroids: &[Asteroid], origin: Asteroid) -> Vec<Asteroid> {
     let mut detected_asteroids: Vec<Asteroid> = vec![];
     let mut movs: Vec<(i32, i32)> = vec![];
 
@@ -133,15 +133,15 @@ impl Asteroid {
         Self { x, y }
     }
 
-    fn compare(&self, other: &Self, origin: &Self) -> Ordering {
+    fn compare(self, other: Self, origin: Self) -> Ordering {
         let u = (self.x - origin.x, self.y - origin.y);
         let v = (other.x - origin.x, other.y - origin.y);
 
-        let num_u = -u.1 as f64;
-        let den_u = ((u.0.pow(2) + u.1.pow(2)) as f64).sqrt();
+        let num_u = f64::from(-u.1);
+        let den_u = f64::from(u.0.pow(2) + u.1.pow(2)).sqrt();
 
-        let num_v = -v.1 as f64;
-        let den_v = ((v.0.pow(2) + v.1.pow(2)) as f64).sqrt();
+        let num_v = f64::from(-v.1);
+        let den_v = f64::from(v.0.pow(2) + v.1.pow(2)).sqrt();
 
         let a_theta_u = num_u / den_u;
         let a_theta_v = num_v / den_v;

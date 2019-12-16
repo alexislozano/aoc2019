@@ -21,7 +21,7 @@ pub fn sub1(s: &str, args: Option<(i64, i64)>) -> i64 {
         computer.set_program(1, noun);
         computer.set_program(2, verb);
     }
-    computer.run(0);
+    computer.run();
     computer.program(0)
 }
 
@@ -37,7 +37,7 @@ pub fn sub2(s: &str) -> i64 {
             let mut computer = Computer::new("computer", program.clone());
             computer.set_program(1, n);
             computer.set_program(2, v);
-            computer.run(0);
+            computer.run();
             if computer.program(0) == 19_690_720 {
                 noun = n;
                 verb = v;

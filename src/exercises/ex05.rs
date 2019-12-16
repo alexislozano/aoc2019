@@ -13,10 +13,12 @@ pub fn sub1(s: &str, input: i64) -> i64 {
         .map(|x| x.parse::<i64>().unwrap_or(0))
         .collect::<Vec<i64>>();
     let mut computer = Computer::new("computer", program);
-    computer.run(input);
-    match computer.state() {
-        State::Terminated => computer.output(),
-        _ => unreachable!(),
+    computer.set_input(input);
+    loop {
+        computer.run();
+        if let State::Terminated = computer.state() {
+            break computer.output();
+        }
     }
 }
 
@@ -26,10 +28,13 @@ pub fn sub2(s: &str, input: i64) -> i64 {
         .map(|x| x.parse::<i64>().unwrap_or(0))
         .collect::<Vec<i64>>();
     let mut computer = Computer::new("computer", program);
-    computer.run(input);
-    match computer.state() {
-        State::Terminated => computer.output(),
-        _ => unreachable!(),
+    computer.set_input(input);
+    computer.run();
+    loop {
+        computer.run();
+        if let State::Terminated = computer.state() {
+            break computer.output();
+        }
     }
 }
 

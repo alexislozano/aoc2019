@@ -6,6 +6,7 @@ pub struct Computer {
     base: i64,
     state: State,
     output: i64,
+    input: Option<i64>,
 }
 
 impl Computer {
@@ -17,6 +18,7 @@ impl Computer {
             base: 0,
             state: State::Initialized,
             output: 0,
+            input: None,
         }
     }
 
@@ -43,9 +45,12 @@ impl Computer {
         self.output
     }
 
-    pub fn run(&mut self, input: i64) {
+    pub fn set_input(&mut self, input: i64) {
+        self.input = Some(input);
+    }
+
+    pub fn run(&mut self) {
         let mut code = Code::new(self.program(self.counter));
-        let mut was_input_used = false;
 
         self.state = loop {
             match code.opcode {
@@ -154,16 +159,17 @@ impl Computer {
                         }
                         Opcode::Input | Opcode::Output | Opcode::AdjustBase => {
                             match code.opcode {
-                                Opcode::Input => {
-                                    if was_input_used {
-                                        break State::Input;
-                                    } else {
-                                        self.set_program(index0, input);
-                                        was_input_used = true;
+                                Opcode::Input => match self.input {
+                                    None => break State::Input,
+                                    Some(i) => {
+                                        self.set_program(index0, i);
+                                        self.input = None;
                                     }
-                                }
+                                },
                                 Opcode::Output => {
-                                    self.output = self.program(index0)
+                                    self.output = self.program(index0);
+                                    self.counter += 2;
+                                    break State::Output;
                                 }
                                 Opcode::AdjustBase => {
                                     self.base += self.program(index0);
@@ -187,6 +193,7 @@ pub enum State {
     Initialized,
     Terminated,
     Input,
+    Output,
 }
 
 #[derive(Debug)]

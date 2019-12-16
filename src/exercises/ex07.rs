@@ -150,7 +150,9 @@ fn run(graph: &Graph, system: &mut System, from: usize, input: i64) -> i64 {
         Some(child_index) => match &system[from].kind {
             AmpKind::Basic => run(graph, system, *child_index, output),
             AmpKind::Output => match &system[*child_index].state() {
-                State::Input => run(graph, system, *child_index, output),
+                State::Input | State::Output => {
+                    run(graph, system, *child_index, output)
+                }
                 _ => output,
             },
         },
@@ -199,9 +201,11 @@ impl Amplifier {
 
     fn run(&mut self, input: i64) {
         if let State::Initialized = self.computer.state() {
-            self.computer.run(self.setting);
+            self.computer.set_input(self.setting);
+            self.computer.run();
         }
-        self.computer.run(input);
+        self.computer.set_input(input);
+        self.computer.run();
     }
 
     fn output(&self) -> i64 {
