@@ -14,6 +14,7 @@ use exercises::ex08::ex08;
 use exercises::ex09::ex09;
 use exercises::ex10::ex10;
 use exercises::ex11::ex11;
+use exercises::ex12::ex12;
 
 fn main() {
     ex01();
@@ -27,4 +28,5 @@ fn main() {
     ex09();
     ex10();
     ex11();
+    ex12();
 }

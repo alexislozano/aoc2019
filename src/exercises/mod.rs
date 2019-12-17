@@ -9,3 +9,4 @@ pub mod ex08;
 pub mod ex09;
 pub mod ex10;
 pub mod ex11;
+pub mod ex12;
