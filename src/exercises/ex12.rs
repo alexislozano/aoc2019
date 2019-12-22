@@ -17,7 +17,7 @@ pub fn sub1(s: &str, steps: i32) -> i32 {
 }
 
 pub fn sub2(s: &str) -> i64 {
-    0
+    s.len() as i64
 }
 
 #[derive(Debug)]
@@ -148,8 +148,42 @@ mod tests {
 
     #[test]
     fn sub21() {
+
+        let moons0 = vec![
+            (-1, 0, 2, 0, 0, 0),
+            (2, -10, -7, 0, 0, 0),
+            (4, -8, 8, 0, 0, 0),
+            (3, 5, -1, 0, 0, 0),
+        ];
+        let moons1 = vec![
+            (2, -1, 1, 3, -1, -1),
+            (3, -7, -4, 1, 3, 3),
+            (1, -7, 5, -3, 1, -3),
+            (2, 2, 0, -1, -3, 1),
+        ];
+        let moons2 = vec![
+            (5, -3, -1, 3, -2, -2),
+            (1, -2, 2, -2, 5, 6),
+            (1, -4, -1, 0, 3, -6),
+            (1, -4, 2, -1, -6, 2),
+        ];
+        let mut m0 = 0;
+        let mut m1 = 0;
+        let mut m2 = 0;
+        for x in moons0.iter() {
+            m0 += x.0 + x.1 + x.2 + x.3 + x.4 + x.5;
+        }
+        for x in moons1.iter() {
+            m1 += x.0 + x.1 + x.2 + x.3 + x.4 + x.5;
+        }
+        for x in moons2.iter() {
+            m2 += x.0 + x.1 + x.2 + x.3 + x.4 + x.5;
+        }
         assert_eq!(
-            0, 0
+            m0, m1
+        );
+        assert_eq!(
+            m0, m2
         );
     }
 }

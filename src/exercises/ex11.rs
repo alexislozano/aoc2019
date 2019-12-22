@@ -56,8 +56,8 @@ fn image(board: &HashMap<(i32, i32), i64>) -> String {
     for i in 0..8 {
         for j in 0..41 {
             match board.get(&(
-                j as i32 as i32, 
-                1 - i as i32 as i32
+                j as i32, 
+                1 - i as i32
             )) {
                 Some(color) => s.push_str(&format!("{} ", color)),
                 None => s.push_str("0 "),
